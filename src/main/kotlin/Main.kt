@@ -1,15 +1,15 @@
 package org.example
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
-fun main() {
-    val name = "Kotlin"
-    //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
-    // to see how IntelliJ IDEA suggests fixing it.
-    println("Hello, " + name + "!")
+import kotlinx.cli.*
+import org.example.entities.Resource
+import org.example.validators.ValidationContext
 
-    for (i in 1..5) {
-        //TIP Press <shortcut actionId="Debug"/> to start debugging your code. We have set one <icon src="AllIcons.Debugger.Db_set_breakpoint"/> breakpoint
-        // for you, but you can always add more by pressing <shortcut actionId="ToggleLineBreakpoint"/>.
-        println("i = $i")
-    }
+fun main(args: Array<String>) {
+    val parser = ArgParser("example")
+    val login by parser.option(ArgType.String, shortName = "l", description = "User login")
+    val password by parser.option(ArgType.String, shortName = "p", description = "User password")
+    val resource by parser.option(ArgType.String, shortName = "r", description = "Path to resource")
+    val action by parser.option(ArgType.String, shortName = "a", description = "Requested action")
+    val volume by parser.option(ArgType.Int, shortName = "v", description = "Volume of used resource")
+    parser.parse(args)
+
 }
