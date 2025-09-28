@@ -16,7 +16,7 @@ fun main(args: Array<String>) {
         parser.parse(args)
     } catch (e: Exception) {
         val helpArg = args + "-h"
-        parser.parse(helpArg) // я буквально не придумал ничего лучше. Господи прости за это...
+        parser.parse(helpArg) // я буквально не придумал ничего лучше. Господи прости за это... да нормуль!!
         exitProcess(StatusCode.HELP_REQUESTED.code)
     }
 
