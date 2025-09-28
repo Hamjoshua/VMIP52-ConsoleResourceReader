@@ -2,11 +2,14 @@
 
 set -e
 
-echo "First: build"
+if [ -e "access-control.jar" ]; then
+    echo "There is access-contol.jar already"    
+else
+    echo "Build needed"
+    ./build.sh
+fi
 
-./build.sh
-
-echo "Then: doing"
+echo "Launching tests via access-control.jar..."
 
 # Счётчик успешных тестов
 PASSED=0
