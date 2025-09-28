@@ -1,6 +1,7 @@
 package org.example
 import kotlinx.cli.*
 import org.example.entities.StatusCode
+import org.example.services.AccessControlService
 import org.example.validators.ValidationContext
 import kotlin.system.exitProcess
 
@@ -14,6 +15,8 @@ fun main(args: Array<String>) {
     try {
         parser.parse(args)
     } catch (e: Exception) {
+        val helpArg = args + "-h"
+        parser.parse(helpArg) // я буквально не придумал ничего лучше. Господи прости за это...
         exitProcess(StatusCode.HELP_REQUESTED.code)
     }
 
@@ -24,4 +27,6 @@ fun main(args: Array<String>) {
         action = action,
         volume = volume
     )
+
+    exitProcess(AccessControlService().checkAccess(context).code)
 }

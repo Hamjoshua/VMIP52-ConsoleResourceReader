@@ -12,11 +12,12 @@ import org.example.validators.concrete.PermissionValidator
 import org.example.validators.concrete.ResourceExistenceValidator
 import org.example.validators.concrete.ResourceFormatValidator
 import org.example.validators.concrete.VolumeValidator
+import org.example.mock.MockData
 
 class AccessControlService(
-    private val users: Map<String, User>,
-    private val resources: Set<Resource>,
-    private val permissions: List<Permission>
+    private val users: List<User> = MockData.users,
+    private val resources: List<Resource> = MockData.resources,
+    private val permissions: List<Permission> = MockData.permissions
 ) {
     private val validatorChain by lazy {
         AuthValidator(users)
