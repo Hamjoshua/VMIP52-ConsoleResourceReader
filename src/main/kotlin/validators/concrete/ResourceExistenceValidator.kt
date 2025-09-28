@@ -7,14 +7,13 @@ import org.example.validators.ValidationContext
 import org.example.validators.ValidationResult
 
 class ResourceExistenceValidator(
-    private val allResources: Set<Resource>
+    private val allResources: List<Resource>
 ) : BaseValidator() {
     override fun handleSelf(context: ValidationContext): ValidationResult {
         val resource = allResources.find { it.path == context.targetResource!!.path }
         if (resource == null) {
             return ValidationResult.Failure(StatusCode.NON_EXISTENT_RESOURCE) // Несуществующий ресурс
         }
-        // Записываем в контекст для следующих валидаторов
         context.targetResource = resource
         return ValidationResult.Success
     }

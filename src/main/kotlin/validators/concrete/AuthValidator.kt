@@ -9,10 +9,10 @@ import org.example.validators.ValidationResult
 
 
 class AuthValidator(
-    private val users: Map<String, User>
+    private val users: List<User>
 ) : BaseValidator() {
     override fun handleSelf(context: ValidationContext): ValidationResult {
-        val user = users[context.login] ?: return ValidationResult.Failure(StatusCode.INVALID_LOGIN)
+        val user = users.find{it.login == context.login} ?: return ValidationResult.Failure(StatusCode.INVALID_LOGIN)
         val hashedInput = hashPassword(context.password, user.salt)
         if (hashedInput != user.passwordHash) {
             return ValidationResult.Failure(StatusCode.INVALID_PASSWORD)
